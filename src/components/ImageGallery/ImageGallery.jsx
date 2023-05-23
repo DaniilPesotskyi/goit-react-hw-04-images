@@ -5,16 +5,28 @@ import Loader from '../Loader/Loader';
 import css from './ImageGallery.module.css';
 
 const ImageGallery = ({ query }) => {
-  const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
+  const [images, setImages] = useState([]);
   const [inLoad, setInLoad] = useState(false);
+
+  useEffect(() => {
+    setImages([]);
+    setPage(1);
+    if (query !== '') {
+      fetchImages(query, page).then(images => {
+        addImages(images);
+      });
+    }
+  }, [query]);
 
   const incrementPage = () => {
     setPage(page + 1);
+    console.log('page: ', page);
   };
 
   const addImages = newImages => {
     setImages([...images, ...newImages]);
+    console.log('images', images);
   };
 
   const fetchImages = async (query, page) => {
@@ -32,14 +44,18 @@ const ImageGallery = ({ query }) => {
     }
   };
 
-  useEffect(() => {
-    setImages([]);
-    setPage(1);
-    incrementPage();
-    fetchImages(query, page).then(images => {
-      addImages(images);
-    });
-  }, [query]);
+  // componentDidUpdate(prevProps, prevState) {
+  //     const prevQuery = prevProps.query;
+  //     const currentQuery = this.props.query;
+
+  //     if (prevQuery !== currentQuery) {
+  //         this.setState({ images: [], page: 1 });
+  //         this.incrementPage()
+  //         this.fetchImages(currentQuery, this.state.page).then(images => {
+  //             this.addImages(images);
+  //         });
+  //     }
+  // }
 
   const onLoadMore = () => {
     setInLoad(true);
