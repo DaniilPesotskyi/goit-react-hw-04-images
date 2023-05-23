@@ -18,6 +18,7 @@ const Searchbar = ({onSubmit}) => {
     }
 
     onSubmit(searchQuery);
+    setSearchQuery('')
   };
   return (
     <header className={css.pageHeader}>
