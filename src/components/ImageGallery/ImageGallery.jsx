@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from 'react';
+import React, { Component } from 'react';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Button from '../Button/Button';
 import Loader from '../Loader/Loader';
