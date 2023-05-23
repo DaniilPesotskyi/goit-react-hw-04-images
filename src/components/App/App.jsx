@@ -1,14 +1,23 @@
-import css from './App.module.css';
+import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Searchbar from '../Searchbar/Searchbar';
+import ImageGallery from '../ImageGallery/ImageGallery';
 
-function App() {
-  return (
-    <>
-      <header className={css.block}>
-        <p className={css.textMain}>REACT APP TEMPLATE</p>
-        <p className={css.textSecondary}>USE IT</p>
-      </header>
-    </>
-  );
+const App = () => {
+    const [searchQuery, setSearchQuery] = useState()
+
+    const onSetSearchQuery = query => {
+        setSearchQuery(query)
+    };
+
+    return (
+        <>
+            <Searchbar onSubmit={onSetSearchQuery} />
+            <ImageGallery query={searchQuery}/>
+            <ToastContainer autoClose={2500}/>
+        </>
+    );
 }
 
 export default App;
